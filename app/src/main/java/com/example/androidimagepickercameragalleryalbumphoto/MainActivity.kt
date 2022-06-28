@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
-            ){
+            ) {
                 //AFTER PERMISSION GRANTED
                 tempImageUri = FileProvider.getUriForFile(
                     this,
