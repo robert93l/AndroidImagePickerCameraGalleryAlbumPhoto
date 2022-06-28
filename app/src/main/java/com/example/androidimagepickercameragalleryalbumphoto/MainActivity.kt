@@ -82,19 +82,19 @@ class MainActivity : AppCompatActivity() {
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
-            )
+            ){
+                //AFTER PERMISSION GRANTED
+                tempImageUri = FileProvider.getUriForFile(
+                    this,
+                    "com.example.androidimagepickercameragalleryalbumphoto.provider",
+                    createImageFile().also {
 
-            //AFTER PERMISSION GRANTED
-            tempImageUri = FileProvider.getUriForFile(
-                this,
-                "com.example.androidimagepickercameragalleryalbumphoto.provider",
-                createImageFile().also {
+                        tempImageFilePath = it.absolutePath
 
-                    tempImageFilePath = it.absolutePath
+                    })
 
-                })
-
-            cameraLauncher.launch(tempImageUri)
+                cameraLauncher.launch(tempImageUri)
+            }
 
         }
 
