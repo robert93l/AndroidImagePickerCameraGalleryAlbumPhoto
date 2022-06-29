@@ -13,6 +13,7 @@ import android.os.Environment
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
@@ -34,15 +35,19 @@ class MainActivity : AppCompatActivity() {
 
     private val selectePictureLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            //imageView.setImageURI(it)
-            uriToFile(this, uri, "select_image_from_gallery")?.let { file ->
+
+            //to check if uri is not null and dont crash the app
+            if (uri != null) {
+                //imageView.setImageURI(it)
+                uriToFile(this, uri, "select_image_from_gallery")?.let { file ->
 
 
-                compressImage(file.absolutePath, 0.5)
+                    compressImage(file.absolutePath, 0.5)
 
-                textViewSize.text = sizeString
+                    textViewSize.text = sizeString
 
-                setImage(imageView, file.absolutePath)
+                    setImage(imageView, file.absolutePath)
+                }
             }
         }
 
@@ -112,6 +117,7 @@ class MainActivity : AppCompatActivity() {
             ) {
                 //after permission granted
                 selectePictureLauncher.launch("image/*")
+
             }
         }
     }
